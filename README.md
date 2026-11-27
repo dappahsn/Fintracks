@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="public/icons/logo-text.png" alt="Fintracks logo" width="220" />
+  <img src="https://raw.githubusercontent.com/dappahsn/Fintracks/main/public/icons/logo-text.png?v=2" alt="Fintracks logo" width="220" />
 
   <p align="center">
     <strong>Aplikasi Pencatatan Keuangan Pribadi Modern, Cepat, dan Elegan</strong>
