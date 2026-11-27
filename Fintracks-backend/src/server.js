@@ -1,8 +1,10 @@
 import { env } from './config/env.js'
-import { createApp } from './app.js'
+import app from './app.js'
 
-const app = createApp()
+if (!process.env.VERCEL) {
+  app.listen(env.port, () => {
+    console.log(`Fintracks API running on http://localhost:${env.port}`)
+  })
+}
 
-app.listen(env.port, () => {
-  console.log(`Fintracks API running on http://localhost:${env.port}`)
-})
+export default app
