@@ -9,19 +9,19 @@
   <p align="center">
     <a href="#-fitur-utama">Fitur</a> •
     <a href="#-tech-stack">Tech Stack</a> •
-    <a href="#-tangkapan-layar">Tampilan</a> •
-    <a href="#-panduan-instalasi">Instalasi</a> •
-    <a href="#-skema-database">Database</a> •
-    <a href="#-struktur-folder">Struktur</a>
+    <a href="#-panduan-instalasi--menjalankan-lokal">Instalasi</a> •
+    <a href="#-deployment-vercel--tidb-cloud">Deployment</a> •
+    <a href="#-skema-database-mysql">Database</a> •
+    <a href="#-struktur-folder-proyek">Struktur</a>
   </p>
 
   <p align="center">
     <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
-    <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+    <img src="https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
     <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" />
-    <img src="https://img.shields.io/badge/Express.js-Backend-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
-    <img src="https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+    <img src="https://img.shields.io/badge/Express.js-5-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
+    <img src="https://img.shields.io/badge/MySQL-TiDB%20Cloud-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
     <img src="https://img.shields.io/badge/PWA-Ready-FF5722?style=for-the-badge&logo=pwa&logoColor=white" alt="PWA" />
   </p>
 
@@ -31,7 +31,7 @@
 
 ## 📖 Tentang Fintracks
 
-**Fintracks** adalah aplikasi web pencatatan keuangan pribadi (*personal finance tracker*) yang dirancang dengan pendekatan *mobile-first*, performa tinggi, dan estetika visual premium. Aplikasi ini memudahkan Anda mencatat arus kas harian, mengelola multi-rekening, serta memantau kesehatan finansial melalui visualisasi analitik interaktif.
+**Fintracks** adalah aplikasi web pencatatan keuangan pribadi (*personal finance tracker*) berbasis **React + TypeScript** di frontend dan **Node.js + Express.js + MySQL** di backend. Dirancang dengan pendekatan *mobile-first*, performa tinggi, serta tampilan bersih untuk mencatat arus kas harian, mengelola multi-rekening, dan memantau kesehatan finansial melalui visualisasi analitik interaktif.
 
 ---
 
@@ -41,7 +41,7 @@
 - **Tipe Transaksi Lengkap:** Mendukung *Pemasukan (+)*, *Pengeluaran (-)*, dan *Transfer Internal (↔)* antar rekening.
 - **Smart Validation:** Otomatis memvalidasi ketersediaan saldo sebelum pengeluaran atau transfer diproses.
 - **Format Otomatis Rupiah:** Input nominal cerdas terformat langsung (*misal `50.000` tersimpan presisi `50000`*).
-- **Pengelompokan Tanggal:** Riwayat transaksi dikelompokkan rapi per tanggal dengan tanggal ringkas (*misal `15 Agt`*).
+- **Pengelompokan Tanggal:** Riwayat transaksi dikelompokkan rapi per tanggal (*Hari Ini*, *Kemarin*, atau tanggal ringkas).
 - **Filter Periode Lengkap:**
   - 📅 **Hari Ini**
   - 📅 **Kemarin**
@@ -51,38 +51,36 @@
   - 📅 **Custom Date Range** *(bebas tentukan tanggal awal & akhir)*
 
 ### 2. 🏦 Manajemen Multi-Rekening
-- Kelola berbagai jenis rekening: **Bank** (BCA, Mandiri, BRI, SeaBank, dll.), **Tunai**, dan **E-Wallet** (GoPay, OVO, Dana, ShopeePay).
-- **Dynamic Balance Calculation:** Saldo dihitung *real-time* dari riwayat mutasi transaksi (*bukan sekadar cached state*).
+- Kelola berbagai jenis rekening: **Bank**, **Tunai**, **E-Wallet**, dan **Lainnya**.
+- **Dynamic Balance Calculation:** Saldo dihitung *real-time* dari riwayat mutasi transaksi dan saldo awal langsung melalui query SQL.
 - **Proteksi Data:** Mencegah penghapusan rekening yang masih memiliki riwayat transaksi aktif.
 - **Halaman Detail Rekening:** Menampilkan mutasi khusus rekening tersebut beserta statistik pemasukan & pengeluaran bulanan.
 
 ### 3. 📊 Rekap & Analitik Keuangan
-- **Kartu Ringkasan:** Indikator jelas untuk *Total Pemasukan*, *Total Pengeluaran*, dan kartu *Selisih* (*Net Cashflow*).
-- **Donut Chart Interaktif (Recharts):** Visualisasi proporsi pengeluaran dan pemasukan dengan segmentasi warna yang dinamis.
-- **Rincian Per Kategori:** Kartu visual per kategori yang dilengkapi persentase kontribusi dan nominal terformat.
+- **Kartu Ringkasan:** Indikator jelas untuk *Total Pemasukan*, *Total Pengeluaran*, dan *Selisih* (*Net Cashflow*).
+- **Donut Chart Interaktif (Recharts):** Visualisasi proporsi pengeluaran dan pemasukan per kategori.
+- **Rincian Per Kategori:** Daftar persentase kontribusi dan nominal terformat untuk setiap kategori.
 
 ### 4. 🏷️ Kategori Kustom Dinamis
-- Kelola kategori pemasukan & pengeluaran sesuai kebutuhan.
-- Tambah, edit nama, dan pilih ikon emoji kustom dari koleksi emoji yang variatif.
+- Kategori bawaan otomatis dibuat untuk setiap akun baru.
+- Tambah, edit nama, dan pilih ikon emoji kustom untuk kategori pemasukan maupun pengeluaran.
 
 ### 5. 🌓 Desain Modern (Emerald & Charcoal Dark)
-- **Tema Terang & Gelap:** Warna *Charcoal Dark* (`#0d0f12`) pekat tanpa rona biru, dipadukan dengan aksen *Emerald Green* (`#064e3b`) dan *Mint* (`#5eead4` / `#86efac`).
-- **Layout Responsif & Terkunci:** Penguncian lebar horizontal (*fixed viewport*) untuk mencegah pergeseran/goyang saat navigasi.
-- **No Layout Shift:** Menggunakan `scrollbar-gutter: stable` sehingga topbar tetap kokoh tanpa getar saat berpindah halaman.
+- **Tema Terang & Gelap:** Warna *Charcoal Dark* (`#0d0f12`) dipadukan dengan aksen *Emerald Green* (`#064e3b`) dan *Mint* (`#5eead4` / `#86efac`).
+- **Layout Responsif:** Optimal di mobile (*bottom navigation* + *bottom sheet*) maupun desktop (*top navbar*).
 
-### 6. 🌐 Multi-Bahasa (i18n) & Personalisasi
+### 6. 🌐 Multi-Bahasa (i18n) & Pengingat
 - Pilihan bahasa: **Bahasa Indonesia** *(default)* dan **English**.
 - **Notifikasi Pengingat Harian:** Menggunakan *Browser Notifications API* pada jam yang dapat disesuaikan.
 
-### 7. 💾 Keamanan & Backup Data
-- **Email & Password + JWT:** Autentikasi aman melalui backend Express.js.
-- **Data Terisolasi Per Akun:** Query backend memvalidasi kepemilikan `user_id` di tingkat database MySQL.
-- **Backup & Restore JSON:** Unduh salinan seluruh data dan pulihkan kapan saja dengan validasi integritas struktur.
-- **Ekspor CSV:** Unduh laporan transaksi dalam format CSV standar Excel (UTF-8 BOM).
+### 7. 🔐 Autentikasi, Keamanan & Backup Data
+- **Email & Password + JWT:** Registrasi dan login aman dengan password ter-hash (`bcryptjs`) serta token JWT.
+- **Isolasi Data Per Akun:** Seluruh endpoint API memvalidasi kepemilikan `user_id` di tingkat backend & query SQL.
+- **Backup & Restore JSON:** Unduh salinan seluruh data (`fintracks-backup-YYYY-MM-DD.json`) dan pulihkan kapan saja dengan pemetaan ID otomatis.
+- **Hapus Semua Data:** Reset seluruh transaksi, rekening, dan kategori kustom dari halaman Pengaturan.
 
 ### 8. 📲 Progressive Web App (PWA)
-- Dapat diinstal (*installable*) langsung di Android, iOS, maupun Desktop layaknya aplikasi *native*.
-- Dilengkapi *Service Worker* dan *Web App Manifest*.
+- Dapat diinstal (*installable*) di perangkat mobile maupun desktop dengan dukungan *Service Worker* dan *Web App Manifest*.
 
 ---
 
@@ -90,111 +88,155 @@
 
 | Komponen | Teknologi | Deskripsi |
 |---|---|---|
-| **Framework** | [React 19](https://react.dev/) | Library UI modern dengan performa tinggi |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) | Type-safety untuk kode yang andal dan terstruktur |
-| **Build Tool** | [Vite](https://vite.dev/) | Bundler super cepat dengan Hot Module Replacement (HMR) |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + CSS Variables | Sistem token desain modern & responsif |
-| **Backend & Database** | [Express.js](https://expressjs.com/) + [MySQL](https://www.mysql.com/) | REST API Node.js, JWT Auth, & SQL |
-| **Charts** | [Recharts](https://recharts.org/) | Grafik Donut Chart interaktif |
-| **Icons** | [Lucide React](https://lucide.dev/) | Ikon vektor modern dan konsisten |
-| **PWA** | [Vite Plugin PWA](https://vite-pwa-org.netlify.app/) | Dukungan Service Worker & instalasi aplikasi |
+| **Frontend** | [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) | UI modern dengan type-safety |
+| **Build Tool** | [Vite](https://vite.dev/) | Bundler cepat dengan HMR |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + CSS Variables | Token desain terang/gelap & responsif |
+| **Backend** | [Node.js](https://nodejs.org/) + [Express.js 5](https://expressjs.com/) | REST API & autentikasi JWT (`Fintracks-backend/`) |
+| **Database** | [MySQL 8](https://www.mysql.com/) / [TiDB Cloud](https://tidbcloud.com/) | Penyimpanan relasional dengan `mysql2` & SSL |
+| **Charts & Icons** | [Recharts](https://recharts.org/) & [Lucide React](https://lucide.dev/) | Grafik donat interaktif & ikon vektor |
+| **PWA** | [Vite Plugin PWA](https://vite-pwa-org.netlify.app/) | Service Worker & instalasi aplikasi |
 
 ---
 
 ## 🛠️ Panduan Instalasi & Menjalankan Lokal
 
 ### 1. Prasyarat
-Pastikan Anda telah menginstal:
-- **Node.js** (versi 18 ke atas)
-- **npm** atau **yarn** / **pnpm**
-- **MySQL Server** (dan menjalankan `Fintracks-backend`)
+- **Node.js** (versi 18+)
+- **MySQL 8** lokal atau database **TiDB Cloud** (MySQL-compatible)
 
 ### 2. Clone Repositori
 ```bash
-git clone https://github.com/username/fintracks.git
-cd fintracks
+git clone https://github.com/dappahsn/Fintracks.git
+cd Fintracks
 ```
 
-### 3. Instal Dependensi
+### 3. Setup & Jalankan Backend (`Fintracks-backend`)
 ```bash
+cd Fintracks-backend
 npm install
-```
-
-### 4. Konfigurasi Environment Variable
-Salin file `.env.example` ke `.env`:
-```bash
 cp .env.example .env
 ```
-Isi URL backend Express Anda di dalam file `.env`:
+Sesuaikan konfigurasi database dan `JWT_SECRET` pada `Fintracks-backend/.env`:
+```env
+PORT=4000
+CORS_ORIGIN=http://localhost:5173
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=fintracks
+DB_USER=root
+DB_PASSWORD=password_mysql_anda
+DB_SSL=false
+JWT_SECRET=ganti-dengan-secret-aman
+```
+Jalankan migrasi tabel dan nyalakan server backend:
+```bash
+npm run db:migrate
+npm run dev
+```
+Backend akan berjalan di `http://localhost:4000` (cek `http://localhost:4000/api/health`).
+
+### 4. Setup & Jalankan Frontend (`Fintracks`)
+Buka terminal baru di root folder `Fintracks`:
+```bash
+npm install
+cp .env.example .env
+```
+Pastikan isi `.env` frontend:
 ```env
 VITE_API_URL=http://localhost:4000/api
 ```
-
-### 5. Jalankan Server Pengembangan
+Jalankan frontend:
 ```bash
 npm run dev
 ```
-Buka browser Anda di `http://localhost:5173`.
+Buka `http://localhost:5173` di browser.
 
-### 6. Build untuk Produksi
-```bash
-npm run build
-```
-Hasil build siap produksi akan berada di direktori `dist/`.
+---
+
+## ☁️ Deployment (Vercel + TiDB Cloud)
+
+1. **Database (TiDB Cloud):**
+   - Buat cluster **Starter (MySQL Compatible)** dan jalankan skema dari [Fintracks-backend/sql/001_initial_schema.sql](Fintracks-backend/sql/001_initial_schema.sql).
+2. **Backend di Vercel (`fintracks-api`):**
+   - Import repo `dappahsn/Fintracks` dengan **Root Directory:** `Fintracks-backend` dan **Application Preset:** `Express`.
+   - Isi Environment Variables: `DB_HOST`, `DB_PORT` (`4000`), `DB_NAME` (`fintracks`), `DB_USER`, `DB_PASSWORD`, `DB_SSL` (`true`), `JWT_SECRET`, dan `CORS_ORIGIN`.
+3. **Frontend di Vercel (`fintracks`):**
+   - Import repo `dappahsn/Fintracks` dengan **Root Directory:** `./` dan **Application Preset:** `Vite`.
+   - Isi Environment Variable: `VITE_API_URL=https://<domain-backend-vercel>/api`.
+   - Setelah URL frontend aktif, perbarui `CORS_ORIGIN` di project backend menjadi URL frontend tersebut lalu *Redeploy*.
 
 ---
 
 ## 🗄️ Skema Database (MySQL)
 
-Aplikasi menggunakan tabel-tabel utama berikut pada `Fintracks-backend`:
+Skema lengkap tersedia di [Fintracks-backend/sql/001_initial_schema.sql](Fintracks-backend/sql/001_initial_schema.sql):
 
 ```mermaid
 erDiagram
     USERS ||--o{ ACCOUNTS : owns
     USERS ||--o{ CATEGORIES : owns
     USERS ||--o{ TRANSACTIONS : owns
+    USERS ||--|| USER_SETTINGS : has
+    USERS ||--|| REMINDERS : has
     ACCOUNTS ||--o{ TRANSACTIONS : logs
     CATEGORIES ||--o{ TRANSACTIONS : categorizes
 
     USERS {
         char36 id PK
-        varchar email
+        varchar email UK
         varchar full_name
+        varchar password_hash
         text avatar_url
         datetime created_at
     }
 
     ACCOUNTS {
-        uuid id PK
-        uuid user_id FK
-        text name
-        text type "bank | cash | ewallet | other"
-        text icon
-        numeric initial_balance
-        timestamp created_at
+        char36 id PK
+        char36 user_id FK
+        varchar name
+        varchar type "bank | cash | ewallet | other"
+        varchar icon
+        decimal initial_balance
+        datetime created_at
     }
 
     CATEGORIES {
-        uuid id PK
-        uuid user_id FK
-        text name
-        text type "income | expense"
-        text icon
-        boolean is_default
-        timestamp created_at
+        char36 id PK
+        char36 user_id FK
+        varchar name
+        varchar type "income | expense"
+        varchar icon
+        tinyint is_default
+        datetime created_at
     }
 
     TRANSACTIONS {
-        uuid id PK
-        uuid user_id FK
-        text type "income | expense | transfer"
-        uuid account_id FK
-        uuid destination_account_id FK
-        uuid category_id FK
-        numeric amount
+        char36 id PK
+        char36 user_id FK
+        varchar type "income | expense | transfer"
+        char36 account_id FK
+        char36 destination_account_id FK
+        char36 category_id FK
+        decimal amount
         date transaction_date
         text notes
-        timestamp created_at
+        datetime created_at
+    }
+
+    USER_SETTINGS {
+        char36 id PK
+        char36 user_id FK
+        varchar language "id | en"
+        varchar theme "system | light | dark"
+        varchar accent_color
+        varchar currency
+    }
+
+    REMINDERS {
+        char36 id PK
+        char36 user_id FK
+        tinyint enabled
+        time time
     }
 ```
 
@@ -204,32 +246,42 @@ erDiagram
 
 ```
 Fintracks/
+├── Fintracks-backend/          # Backend Express.js + MySQL
+│   ├── api/                    # Entrypoint serverless Vercel
+│   ├── sql/                    # Skema SQL MySQL
+│   └── src/
+│       ├── config/             # Konfigurasi env & SSL
+│       ├── constants/          # Data default kategori & user
+│       ├── db/                 # Pool mysql2 & script migrasi
+│       ├── middleware/         # JWT auth & error handler
+│       ├── routes/             # REST API routes
+│       ├── app.js              # Konfigurasi Express app
+│       └── server.js           # Entrypoint server lokal
 ├── public/
-│   ├── icons/                  # Logo & favicon aplikasi
-│   └── manifest.webmanifest    # Konfigurasi PWA
+│   └── icons/                  # Logo & favicon aplikasi
 ├── src/
 │   ├── components/             # Komponen UI modular
 │   │   ├── accounts/           # Form & kartu rekening
-│   │   ├── categories/         # Manajemen kategori
-│   │   ├── layout/             # Pembungkus layout
-│   │   ├── navigation/         # Topbar desktop & Bottom nav mobile
+│   │   ├── auth/               # Route protection
+│   │   ├── categories/         # Form kategori
+│   │   ├── navigation/         # Topbar desktop & bottom nav mobile
 │   │   ├── recap/              # Donut chart & summary cards
-│   │   ├── transactions/       # Item transaksi, filter bar, form
-│   │   └── ui/                 # Reusable UI (Button, Input, BottomSheet, dll.)
+│   │   ├── transactions/       # List, item, filter bar, & form transaksi
+│   │   └── ui/                 # Reusable UI (Button, Input, Modal, dll.)
 │   ├── contexts/               # React Context (Auth, Theme, I18n, Toast)
 │   ├── layouts/                # AppLayout & AuthLayout
-│   ├── lib/                    # API client & konstanta
-│   ├── locales/                # Dictionary multi-bahasa (ID & EN)
-│   ├── pages/                  # Halaman aplikasi (Transactions, Accounts, Recap, Settings, dll.)
-│   ├── services/               # Integrasi API & database query
+│   ├── lib/                    # HTTP API client & konstanta
+│   ├── locales/                # Multi-bahasa (ID & EN)
+│   ├── pages/                  # Halaman aplikasi
+│   ├── services/               # Integrasi REST API backend
 │   ├── types/                  # Definisi TypeScript
-│   ├── utils/                  # Format mata uang, tanggal, dan kalkulasi
+│   ├── utils/                  # Format mata uang, tanggal, & validasi
 │   ├── App.tsx                 # Routing aplikasi
-│   ├── index.css               # Desain sistem tema & Tailwind CSS v4
+│   ├── index.css               # Sistem tema & Tailwind CSS v4
 │   └── main.tsx                # Entry point
 ├── index.html
 ├── package.json
-├── tsconfig.json
+├── vercel.json
 └── vite.config.ts
 ```
 
@@ -237,7 +289,7 @@ Fintracks/
 
 ## 📄 Lisensi
 
-Didistribusikan di bawah Lisensi MIT. Lihat file `LICENSE` untuk informasi lebih lanjut.
+Didistribusikan di bawah Lisensi MIT.
 
 ---
 

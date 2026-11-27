@@ -1,8 +1,8 @@
 # Fintracks Backend (Node.js + Express.js + MySQL)
 
-Backend REST API untuk aplikasi **Fintracks** sebagai pengganti Supabase.
+Backend REST API untuk aplikasi **Fintracks** berbasis **Node.js**, **Express.js**, dan **MySQL / TiDB Cloud**.
 
-## Setup
+## Setup Lokal
 
 1. Install dependensi:
    ```bash
@@ -18,8 +18,10 @@ Backend REST API untuk aplikasi **Fintracks** sebagai pengganti Supabase.
    DB_NAME=fintracks
    DB_USER=root
    DB_PASSWORD=
+   DB_SSL=false
    JWT_SECRET=ganti-dengan-secret-aman
    ```
+   *(Untuk database cloud seperti TiDB Cloud, Anda juga bisa mengisi `DATABASE_URL` dan mengaktifkan `DB_SSL=true`.)*
 
 3. Jalankan migrasi database & tabel SQL (`sql/001_initial_schema.sql`):
    ```bash
@@ -31,10 +33,16 @@ Backend REST API untuk aplikasi **Fintracks** sebagai pengganti Supabase.
    npm run dev
    ```
 
+## Deploy di Vercel
+
+- Import repository `dappahsn/Fintracks` dengan **Root Directory:** `Fintracks-backend` dan **Application Preset:** `Express`.
+- Gunakan [api/index.js](api/index.js) dan [vercel.json](vercel.json) yang sudah tersedia.
+- Isi Environment Variables (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_SSL`, `JWT_SECRET`, `CORS_ORIGIN`).
+
 ## Endpoint Utama
 
 - `GET /` & `GET /api/health`
-- `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`
+- `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/ensure-defaults`
 - `GET /api/accounts`, `GET /api/accounts/:id`, `POST /api/accounts`, `PATCH /api/accounts/:id`, `DELETE /api/accounts/:id`
 - `GET /api/transactions`, `GET /api/transactions/:id`, `POST /api/transactions`, `PATCH /api/transactions/:id`, `DELETE /api/transactions/:id`
 - `GET /api/categories`, `POST /api/categories`, `PATCH /api/categories/:id`, `DELETE /api/categories/:id`
