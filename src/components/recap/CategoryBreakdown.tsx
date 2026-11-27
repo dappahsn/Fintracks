@@ -2,7 +2,6 @@ import type { CategoryBreakdownItem } from '@/services/recap.service'
 import { formatCurrency } from '@/utils/currency'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { useI18n } from '@/contexts/I18nContext'
-import { CHART_COLORS } from './DonutChart'
 
 // Icon background classes for well-known categories or indexed colors
 const PASTEL_BG_CLASSES = [

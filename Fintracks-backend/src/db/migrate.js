@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import mysql from 'mysql2/promise'
-import { env } from '../config/env.js'
+import { buildMysqlConnectionConfig, env } from '../config/env.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const schemaPath = path.resolve(__dirname, '../../sql/001_initial_schema.sql')
@@ -10,10 +10,7 @@ const schemaPath = path.resolve(__dirname, '../../sql/001_initial_schema.sql')
 async function migrate() {
   const sql = await fs.readFile(schemaPath, 'utf8')
   const conn = await mysql.createConnection({
-    host: env.dbHost,
-    port: env.dbPort,
-    user: env.dbUser,
-    password: env.dbPassword,
+    ...buildMysqlConnectionConfig({ includeDatabase: false }),
     multipleStatements: true,
   })
 

@@ -6,13 +6,6 @@ export interface AccountWithCurrentBalance extends Account {
 }
 
 /**
- * Get all accounts for the current user.
- */
-export async function getAccounts(_userId?: string): Promise<Account[]> {
-  return apiRequest<AccountWithCurrentBalance[]>('/accounts')
-}
-
-/**
  * Get single account with computed balance & monthly stats.
  */
 export async function getAccountById(accountId: string, _userId?: string) {
@@ -29,15 +22,6 @@ export async function getAccountById(accountId: string, _userId?: string) {
     }
     throw err
   }
-}
-
-/**
- * Compute the current balance for a single account.
- */
-export async function getAccountBalance(accountId: string): Promise<number> {
-  const detail = await getAccountById(accountId)
-  if (!detail) throw new Error('Account not found')
-  return detail.currentBalance
 }
 
 /**

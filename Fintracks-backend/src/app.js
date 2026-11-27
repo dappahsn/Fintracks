@@ -14,9 +14,14 @@ import backupRoutes from './routes/backup.routes.js'
 export function createApp() {
   const app = express()
 
+  const allowedOrigins = env.corsOrigin
+    .split(',')
+    .map((s) => s.trim().replace(/\/+$/, ''))
+    .filter(Boolean)
+
   app.use(
     cors({
-      origin: env.corsOrigin.split(',').map((s) => s.trim()),
+      origin: allowedOrigins.includes('*') ? true : allowedOrigins,
       credentials: true,
     })
   )

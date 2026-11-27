@@ -9,7 +9,6 @@ export const en: Record<TranslationKey, string> = {
 
   // Auth / Login
   'auth.tagline': 'Manage your finances with ease.',
-  'auth.google': 'Sign in with Google',
   'auth.login_tab': 'Sign In',
   'auth.register_tab': 'Register',
   'auth.full_name': 'Full Name',
@@ -156,7 +155,6 @@ export const en: Record<TranslationKey, string> = {
   'settings.logout': 'Logout',
   'settings.logout_confirm': 'Sign out of your account?',
   'settings.logout_desc': 'You will be signed out. Your financial data remains safe.',
-  'settings.provider': 'Signed in with Google',
 
   // Reminder
   'reminder.title': 'Daily Reminder',

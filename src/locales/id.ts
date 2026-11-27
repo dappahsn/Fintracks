@@ -7,7 +7,6 @@ export const id = {
 
   // Auth / Login
   'auth.tagline': 'Kelola keuangan dengan lebih mudah.',
-  'auth.google': 'Masuk dengan Google',
   'auth.login_tab': 'Masuk',
   'auth.register_tab': 'Daftar',
   'auth.full_name': 'Nama Lengkap',
@@ -154,7 +153,6 @@ export const id = {
   'settings.logout': 'Keluar',
   'settings.logout_confirm': 'Keluar dari akun?',
   'settings.logout_desc': 'Kamu akan keluar dari aplikasi. Data keuanganmu tetap aman.',
-  'settings.provider': 'Login dengan Google',
 
   // Reminder
   'reminder.title': 'Pengingat Harian',

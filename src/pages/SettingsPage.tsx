@@ -282,17 +282,6 @@ export function SettingsPage() {
   const name = user?.full_name || 'Pengguna'
   const email = user?.email ?? 'user@example.com'
 
-  const themeLabels: Record<ThemeMode, string> = {
-    light: 'Terang',
-    dark: 'Gelap',
-    system: 'Terang',
-  }
-
-  const languageLabels: Record<Language, string> = {
-    id: 'Bahasa Indonesia',
-    en: 'English',
-  }
-
   return (
     <div className="min-h-screen pb-12">
       <div className="w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 md:px-0 py-4 sm:py-6 space-y-6 sm:space-y-8">

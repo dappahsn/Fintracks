@@ -32,36 +32,6 @@ export async function getTransactions(
 }
 
 /**
- * Get all transactions in a date range (for export/recap — no pagination).
- */
-export async function getAllTransactionsInRange(
-  _userId: string,
-  filter: TransactionFilter
-): Promise<Transaction[]> {
-  const qs = buildQuery({
-    startDate: filter.startDate,
-    endDate: filter.endDate,
-    accountId: filter.accountId,
-  })
-  return apiRequest<Transaction[]>(`/transactions/export${qs}`)
-}
-
-/**
- * Get transactions for a specific account.
- */
-export async function getAccountTransactions(
-  accountId: string,
-  page: number = 0
-): Promise<{ data: Transaction[]; hasMore: boolean }> {
-  const qs = buildQuery({
-    accountId,
-    page,
-    limit: TRANSACTIONS_PER_PAGE,
-  })
-  return apiRequest<{ data: Transaction[]; hasMore: boolean }>(`/transactions${qs}`)
-}
-
-/**
  * Get a single transaction by ID.
  */
 export async function getTransactionById(id: string): Promise<Transaction | null> {

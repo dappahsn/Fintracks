@@ -36,7 +36,7 @@ Backend REST API untuk aplikasi **Fintracks** sebagai pengganti Supabase.
 - `GET /` & `GET /api/health`
 - `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`
 - `GET /api/accounts`, `GET /api/accounts/:id`, `POST /api/accounts`, `PATCH /api/accounts/:id`, `DELETE /api/accounts/:id`
-- `GET /api/transactions`, `GET /api/transactions/export`, `GET /api/transactions/:id`, `POST /api/transactions`, `PATCH /api/transactions/:id`, `DELETE /api/transactions/:id`
+- `GET /api/transactions`, `GET /api/transactions/:id`, `POST /api/transactions`, `PATCH /api/transactions/:id`, `DELETE /api/transactions/:id`
 - `GET /api/categories`, `POST /api/categories`, `PATCH /api/categories/:id`, `DELETE /api/categories/:id`
 - `GET /api/recap/summary`, `GET /api/recap/breakdown`
 - `GET /api/settings`, `PATCH /api/settings`, `GET /api/settings/reminder`, `PATCH /api/settings/reminder`

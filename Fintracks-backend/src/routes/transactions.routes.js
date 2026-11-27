@@ -123,40 +123,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/export', async (req, res, next) => {
-  try {
-    const userId = req.user.id
-    const { startDate, endDate, accountId } = req.query
-
-    const conditions = ['t.user_id = ?']
-    const values = [userId]
-
-    if (startDate) {
-      conditions.push('t.transaction_date >= ?')
-      values.push(String(startDate))
-    }
-    if (endDate) {
-      conditions.push('t.transaction_date <= ?')
-      values.push(String(endDate))
-    }
-    if (accountId) {
-      conditions.push('(t.account_id = ? OR t.destination_account_id = ?)')
-      values.push(String(accountId), String(accountId))
-    }
-
-    const [rows] = await pool.query(
-      `${TRANSACTION_SELECT}
-       WHERE ${conditions.join(' AND ')}
-       ORDER BY t.transaction_date DESC, t.created_at DESC`,
-      values
-    )
-
-    res.json(rows.map(formatTransaction))
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.get('/:id', async (req, res, next) => {
   try {
     const tx = await getFormattedTransactionById(req.params.id, req.user.id)
