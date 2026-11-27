@@ -35,12 +35,17 @@ export function createApp() {
     })
   })
 
-  app.get('/api/health', async (_req, res, next) => {
+  app.get('/api/health', async (_req, res) => {
     try {
       await pool.query('SELECT 1')
       res.json({ status: 'ok', database: 'mysql' })
     } catch (err) {
-      next(err)
+      console.error('Healthcheck DB error:', err)
+      res.status(500).json({
+        status: 'error',
+        code: err?.code || 'DB_ERROR',
+        message: err?.message || 'Database connection failed',
+      })
     }
   })
 

@@ -26,7 +26,7 @@ export const env = {
   dbName: parsedUrl?.database || process.env.DB_NAME || 'fintracks',
   dbUser: parsedUrl?.user || process.env.DB_USER || 'root',
   dbPassword: parsedUrl?.password ?? process.env.DB_PASSWORD ?? '',
-  dbSsl: sslEnabled ? { rejectUnauthorized } : undefined,
+  dbSsl: sslEnabled ? { minVersion: 'TLSv1.2', rejectUnauthorized } : undefined,
   jwtSecret: process.env.JWT_SECRET || 'dev-fintracks-secret-change-in-production',
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
 }
